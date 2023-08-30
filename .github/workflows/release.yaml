@@ -19,6 +19,12 @@ on:
 
 concurrency: trigger-release
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+
 env:
   TAG_PREFIX: v
   INITIAL_TAG: v0.1.0
@@ -46,7 +52,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        token: ${{ secrets.WORKFLOW_USER_GH_TOKEN }}
+        fetch-depth: 0
 
     - name: Setup semver
       uses: ./.github/actions/setup-semver
